@@ -16,4 +16,4 @@ run:
   - -exc
   - |
     DIR="${PWD}"
-    mv concourse ${DIR}/bumped
+    mv concourse ${DIR}/source
