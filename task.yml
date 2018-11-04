@@ -16,4 +16,5 @@ run:
   - -exc
   - |
     DIR="${PWD}"
-    mv concourse ${DIR}/source
+    ls
+    cp concourse ${DIR}/source
