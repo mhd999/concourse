@@ -17,4 +17,4 @@ run:
   - |
     DIR="${PWD}"
     ls
-    cp -R ./concourse ./ssource
+    cp -R ./concourse ./source
