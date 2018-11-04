@@ -17,4 +17,6 @@ run:
   - |
     DIR="${PWD}"
     ls
-    cp -R ./concourse ./source
+    cp -R ./concourse/schema.graphql ./source
+    cd source
+    ls
