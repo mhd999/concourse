@@ -16,7 +16,6 @@ run:
   - -exc
   - |
     ls
-    cp concourse/schema.graphql ../schema/ 
+    cp concourse/schema.graphql schema
     ls
-    cd ../
     cat schema/schema.graphql
