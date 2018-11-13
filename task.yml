@@ -4,12 +4,10 @@ image_resource:
   type: docker-image
   source: {repository: busybox}
 
-inputs:
+outputs:
   - name: concourse
 
 run:
-  path: sh
+  path: echo
   args:
-  - -exc
-  - |
-    cat ./concourse/schema.graphql
+  - hello world
