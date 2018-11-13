@@ -6,7 +6,8 @@ image_resource:
 
 inputs:
   - name: concourse
-ouputs:
+
+outputs:
   - name: concourse
 
 
