@@ -6,9 +6,11 @@ image_resource:
 
 inputs:
   - name: concourse
+ouputs:
+  - name: concourse
+
 
 run:
-  # dir: concourse
   path: sh
   args:
   - -exc
