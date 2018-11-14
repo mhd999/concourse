@@ -8,7 +8,7 @@ type Query {
 
 type Todo {
     id: ID!
-    name: Int
+    name: String
     description: Int
     priority: Int
 }
