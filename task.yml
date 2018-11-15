@@ -17,5 +17,7 @@ run:
   - |
     ls
     cp concourse/schema.graphql schema
+    cp concourse/resolvers.yml schema
     ls
     cat schema/schema.graphql
+    cat schema/resolvers.yml
