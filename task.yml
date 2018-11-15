@@ -10,12 +10,18 @@ inputs:
 outputs:
   - name: schema
 
+params:
+  - env:
+    - TF_V1: "secret1"
+    - TF_V2: "secret2"
+    - TF_V2: "secret2"
 run:
   path: sh
   args:
   - -exc
   - |
     ls
+    echo "$env"
     cp concourse/schema.graphql schema
     cp concourse/resolvers.yml schema
     ls
