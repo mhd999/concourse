@@ -22,8 +22,9 @@ run:
   - |
     ls
     echo "$env"
-    cp concourse/schema.graphql schema
-    cp concourse/resolvers.yml schema
-    ls
-    cat schema/schema.graphql
-    cat schema/resolvers.yml
+    for row in $(echo "${env}" | jq -r '.[] | @base64'); do
+      key=$(echo ${row} | base64 --decode | jq -r 'keys[]')
+      value=$(echo ${row} | base64 --decode | jq -r 'values[]')
+      echo export x="123"
+    done
+    echo "$x"
