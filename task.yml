@@ -21,8 +21,10 @@ run:
   - -exc
   - |
     ls
-    curl -o /usr/bin/jq http://stedolan.github.io/jq/download/linux64/jq
+    JQ_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cache/linux-amd64/jq-latest" 
+    curl --silent --show-error --location --fail --retry 3 --output /usr/bin/jq $JQ_URL
     chmod +x /usr/bin/jq
+    jq --version
     echo "$env"
     for row in $(echo "${env}" | jq -r '.[] | @base64'); do
       key=$(echo ${row} | base64 --decode | jq -r 'keys[]')
