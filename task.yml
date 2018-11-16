@@ -21,6 +21,9 @@ run:
   - -exc
   - |
     ls
+    opkg-install bash unzip curl vim bind-tools
+    curl -o /usr/bin/jq http://stedolan.github.io/jq/download/linux64/jq \
+      && chmod +x /usr/bin/jq
     echo "$env"
     for row in $(echo "${env}" | jq -r '.[] | @base64'); do
       key=$(echo ${row} | base64 --decode | jq -r 'keys[]')
