@@ -26,7 +26,9 @@ run:
     chmod +x /usr/bin/jq
     jq --version
     for row in $(echo "${env}" | jq -r '.[] | @base64'); do
-      export echo $(echo ${row} | base64 --decode | jq -r 'keys[]')=$(echo ${row} | base64 --decode | jq -r 'values[]')
+      KEY="$(echo ${row} | base64 --decode | jq -r 'keys[]')"
+      VALUE="$(echo ${row} | base64 --decode | jq -r 'values[]')"
+      export "$KEY=$VALUE"
     done
     echo "$TF_V1"
     echo "$TF_V2"
