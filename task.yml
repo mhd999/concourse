@@ -28,8 +28,8 @@ run:
     for row in $(echo "${env}" | jq -r '.[] | @base64'); do
       KEY="$(echo ${row} | base64 --decode | jq -r 'keys[]')"
       VALUE="$(echo ${row} | base64 --decode | jq -r 'values[]')"
-      export "$KEY=$VALUE"
+      export TF_V1=$VALUE
     done
-    echo "$TF_V1"
+    echo "${TF_V1}"
     echo "$TF_V2"
     echo "$TF_V3"
