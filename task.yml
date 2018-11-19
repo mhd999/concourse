@@ -25,7 +25,7 @@ run:
     curl --silent --show-error --location --fail --retry 3 --output /usr/bin/jq $JQ_URL
     chmod +x /usr/bin/jq
     jq --version
-    echo $envs
+    echo $envs${1}
     echo -----------
     for obj in $(echo "${json}" | jq -c '.[]'); do
       ENV="$(echo ${obj} | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]")"
