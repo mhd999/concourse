@@ -28,8 +28,8 @@ run:
     echo $envs
     echo -----------
     for obj in $(echo "${envs}" | jq -r '.[] | @base64'); do
-      ENV="$(echo ${obj} | base64 --decode | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]")"
-      export $ENV
+      ENV_VAR="$(echo ${obj} | base64 --decode | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]")"
+      export $ENV_VAR
     done
     echo $TF_V1
     echo $TF_V2
