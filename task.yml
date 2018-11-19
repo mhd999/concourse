@@ -11,10 +11,10 @@ outputs:
   - name: schema
 
 params:
-  - env_vars:
+  - tf_vars:
     - TF_V1: "secret1"
     - TF_V2: "secret2"
-    - TF_V2: "secret2"
+    - TF_V3: "secret3"
 run:
   path: sh
   args:
@@ -25,11 +25,9 @@ run:
     curl --silent --show-error --location --fail --retry 3 --output /usr/bin/jq $JQ_URL
     chmod +x /usr/bin/jq
     jq --version
-    echo $env_vars
-    echo -----------
-    for obj in $(echo "${env_vars}" | jq -c '.[]'); do
-      ENV_VAR="$(echo ${obj} | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]")"
-      export $ENV_VAR
+    for obj in $(echo "${tf_vars}" | jq -c '.[]'); do
+      TF_VAR="$(echo ${obj} | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]")"
+      export $TF_VAR
     done
     echo $TF_V1
     echo $TF_V2
