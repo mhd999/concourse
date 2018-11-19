@@ -29,6 +29,6 @@ run:
       TF_VAR="$(echo ${obj} | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]")"
       export $TF_VAR
     done
-    terraform plan terraform.tf
+    # terraform plan terraform.tf
     
 
