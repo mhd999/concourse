@@ -12,8 +12,8 @@ outputs:
 
 params:
   tf_vars:
-    TF_VAR_foo: "foo-secret"
-    TF_VAR_bar: "bar-secret"
+    - TF_VAR_foo: "foo-secret"
+    - TF_VAR_bar: "bar-secret"
 run:
   path: sh
   args:
