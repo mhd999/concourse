@@ -11,7 +11,7 @@ outputs:
   - name: schema
 
 params:
-  - env:
+  - envs:
     - TF_V1: "secret1"
     - TF_V2: "secret2"
     - TF_V2: "secret2"
@@ -25,7 +25,7 @@ run:
     curl --silent --show-error --location --fail --retry 3 --output /usr/bin/jq $JQ_URL
     chmod +x /usr/bin/jq
     jq --version
-    for obj in $(echo "${json}" | jq -r '.[] | @base64'); do
+    for obj in $(echo "${envs}" | jq -r '.[] | @base64'); do
       ENV="$(echo ${obj} | base64 --decode | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]")"
       export $ENV
     done
