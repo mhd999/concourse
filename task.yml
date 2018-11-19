@@ -28,7 +28,7 @@ run:
     echo $env_vars
     echo -----------
     for obj in $(echo "${env_vars}" | jq -c '.[]'); do
-      ENV="$(echo ${obj} | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]")"
+      ENV_VAR="$(echo ${obj} | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]")"
       export $ENV_VAR
     done
     echo $TF_V1
