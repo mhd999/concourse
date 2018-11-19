@@ -22,14 +22,19 @@ run:
   - |
     ls
     cd concourse
-    JQ_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cache/linux-amd64/jq-latest" 
-    curl --silent --show-error --location --fail --retry 3 --output /usr/bin/jq $JQ_URL
-    chmod +x /usr/bin/jq
-    jq --version
-    for obj in $(echo "${tf_vars}" | jq -c '.[]'); do
-      TF_VAR="$(echo ${obj} | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]")"
-      export $TF_VAR
-    done
+    if [ -z "$tf_vars" ]
+    then
+      echo "\$tf_vars is empty"
+    else
+      JQ_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cache/linux-amd64/jq-latest" 
+        curl --silent --show-error --location --fail --retry 3 --output /usr/bin/jq $JQ_URL
+        chmod +x /usr/bin/jq
+        jq --version
+        for obj in $(echo "${tf_vars}" | jq -c '.[]'); do
+          TF_VAR="$(echo ${obj} | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]")"
+          export $TF_VAR
+        done
+    fi
     terraform init
     terraform plan
     
