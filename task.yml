@@ -25,13 +25,11 @@ run:
     curl --silent --show-error --location --fail --retry 3 --output /usr/bin/jq $JQ_URL
     chmod +x /usr/bin/jq
     jq --version
-    for row in $(echo "${env}" | jq -r '.[] | @base64'); do
-      KEY="$(echo ${row} | base64 --decode | jq -r 'keys[]')"
-      VALUE="$(echo ${row} | base64 --decode | jq -r 'values[]')"
-      export TF_V1="$(echo ${row} | base64 --decode | jq -r 'values[]')"
-      export X="123"
+    for obj in $(echo "${json}" | jq -r '.[] | @base64'); do
+      ENV="$(echo ${obj} | base64 --decode | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]")"
+      export $ENV
     done
-    echo "${TF_V1}"
-    echo "${X}"
-    echo "$TF_V2"
-    echo "$TF_V3"
+    echo $TF_V1
+    echo $TF_V2
+    echo $TF_V3
+
