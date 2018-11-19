@@ -12,9 +12,9 @@ outputs:
 
 params:
   - tf_vars:
-    - TF_V1: "secret1"
-    - TF_V2: "secret2"
-    - TF_V3: "secret3"
+    - TF_VAR_V1: "secret1qddjehshbalala"
+    - TF_VAR_V2: "secret2"
+    - TF_VAR_V3: "secret3"
 run:
   path: sh
   args:
@@ -29,7 +29,6 @@ run:
       TF_VAR="$(echo ${obj} | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]")"
       export $TF_VAR
     done
-    echo $TF_V1
-    echo $TF_V2
-    echo $TF_V3
+    terraform plan terraform.tf
+    
 
